@@ -73,14 +73,20 @@ jobs:
         with:
           name: app-debug-androidTest
 
-      - name: Login to Google Cloud
-        uses: google-github-actions/setup-gcloud
-        with:
-          version: '270.0.0'
-          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+      # - name: Login to Google Cloud
+      #   uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      #   with:
+      #     version: '270.0.0'
+      #     service_account_key: ${{ secrets.GCLOUD_AUTH }}
+      # - name: Set current project
+      #   run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
 
-      - name: Set current project
-        run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.FIREBASE_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+          export_default_credentials: true
 
       - name: Run Instrumentation Tests in Firebase Test Lab
         run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel4,version=30,locale=en,orientation=portrait
