@@ -66,7 +66,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Set up auth
-        run: bash echo -e ${{ secrets.GCLOUD_AUTH }} >> firebase_auth.json
+        run: bash ./echo -e ${{ secrets.GCLOUD_AUTH }} >> firebase_auth.json
 
       - name: Download app APK
         uses: actions/download-artifact@v1
