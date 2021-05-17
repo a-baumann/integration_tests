@@ -55,6 +55,9 @@ jobs:
           name: app-debug-androidTest
           path: build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 
+
+
+
   firebase:
     name: Run UI tests with Firebase Test Lab
     needs: apk
@@ -62,6 +65,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - name: Set up auth
+        run: echo ${{ secrets.GCLOUD_AUTH }} > firebase_auth.json
 
       - name: Download app APK
         uses: actions/download-artifact@v1
@@ -90,4 +95,4 @@ jobs:
       - name: Use gcloud CLI
         run: gcloud info
       - name: Run Instrumentation Tests in Firebase Test Lab
-        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel4,version=30,locale=en,orientation=portrait
+        run: GOOGLE_APPLICATION_CREDENTIALS="firebase_auth.json" gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel4,version=30,locale=en,orientation=portrait
