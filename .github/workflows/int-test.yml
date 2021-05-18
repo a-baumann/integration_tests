@@ -77,7 +77,6 @@ jobs:
       #   with:
       #     name: app-debug-androidTest
 
-
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
