@@ -91,4 +91,4 @@ jobs:
       - name: list
         run: gcloud auth list
       - name: Run Instrumentation Tests in Firebase Test Lab
-        run: GOOGLE_APPLICATION_CREDENTIALS="firebase_auth.json" gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel3,version=30,locale=en,orientation=portrait
+        run: GOOGLE_APPLICATION_CREDENTIALS="firebase_auth.json" gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
